@@ -1,0 +1,590 @@
+/* ==========================================================
+   GOOGLE FONT
+========================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+/* ==========================================================
+   BODY
+========================================================== */
+body{
+
+    background:#EEF2F5;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:
+    max(20px,env(safe-area-inset-top))
+    20px
+    max(20px,env(safe-area-inset-bottom));
+
+}
+
+/* ==========================================================
+   PHONE CONTAINER
+========================================================== */
+.phone{
+
+    width:100%;
+    max-width:390px;
+
+    background:#FFFFFF;
+
+    border-radius:28px;
+
+    padding:20px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+.title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:22px;
+
+}
+
+.header-left{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-start;
+
+}
+
+.icon-title{
+
+    color:#06A77D;
+
+    font-size:22px;
+
+    margin-top:2px;
+
+}
+
+.title h1{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#172B4D;
+
+}
+
+.title p{
+
+    margin-top:5px;
+
+    font-size:12px;
+
+    color:#7B8794;
+
+}
+
+/* ==========================================================
+   LIVE
+========================================================== */
+.live{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    color:#06A77D;
+
+}
+
+.live-indicator{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    display:inline-block;
+
+    margin-right:4px;
+
+    background:#06D6A0;
+
+    animation:pulse 1s infinite;
+
+}
+
+#clock{
+
+    margin-top:5px;
+
+    font-family:'DS-Digital',monospace;
+
+    font-size:40px;
+
+    letter-spacing:2px;
+
+    color:#172B4D;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+.card{
+
+    border-radius:22px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.08);
+
+    transition:
+        background .5s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 28px rgba(0,0,0,.12);
+
+}
+
+/* ==========================================================
+   CARD COLOR
+========================================================== */
+
+.tsp-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #D9F8E7,
+        #C7F3D8
+    );
+
+}
+
+.eco2-card{
+
+    background:
+    linear-gradient(
+        135deg,
+        #FFF5D2,
+        #FFEBAE
+    );
+
+}
+
+.small{
+
+    background:
+    linear-gradient(
+        180deg,
+        #EEF6FF,
+        #DDEEFF
+    );
+
+    width:100%;
+    min-width:0;
+    overflow:hidden;
+}
+
+/* ==========================================================
+   CARD HEADER
+========================================================== */
+
+.card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.card-top p{
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:#44546A;
+
+}
+
+.card-top span{
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================================
+   VALUE
+========================================================== */
+
+.value{
+
+    margin-top:12px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:6px;
+
+}
+
+.value span{
+
+    font-size:clamp(48px,8vw,64px);
+
+    font-weight:500;
+
+    color:#172B4D;
+
+    line-height:1;
+
+}
+
+.value small{
+
+    font-size:24px;
+
+    margin-bottom:8px;
+
+    color:#44546A;
+
+}
+
+/* ==========================================================
+   CHART PLACEHOLDER
+========================================================== */
+
+.chart-placeholder{
+
+    height:150px;
+
+    margin-top:15px;
+
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap: 16px;
+
+}
+
+/* ==========================================================
+   SMALL CARD
+========================================================== */
+
+.small p{
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    color:#44546A;
+
+}
+
+.small-value{
+
+    margin-top:18px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:5px;
+
+}
+
+.small-value span{
+
+    font-size:clamp(38px,7vw,46px);
+
+    font-weight:500;
+
+    line-height:1;
+
+    color:#172B4D;
+
+}
+
+.small-value small{
+
+    font-size:22px;
+
+    margin-bottom:7px;
+
+    color:#44546A;
+
+}
+
+.mini-chart{
+
+    height:70px;
+
+    margin-top:15px;
+
+
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+footer{
+
+    margin-top:20px;
+
+    padding-top:14px;
+
+    border-top:1px solid #E8ECF1;
+
+    text-align:center;
+
+    font-size:11px;
+
+    color:#7B8794;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:480px){
+
+    body{
+
+        padding:10px;
+
+    }
+
+    .phone{
+
+        border-radius:24px;
+
+        padding:16px;
+
+    }
+
+    #clock{
+
+        font-size:34px;
+
+    }
+
+}
+
+#lastUpdate{
+
+    margin-top:8px;
+
+    font-size:11px;
+
+    color:#666;
+
+    line-height:1.4;
+
+    text-align:right;
+
+}
+
+/* ==========================================
+   TSP CARD STATUS
+========================================== */
+
+.tsp-good{
+    background:linear-gradient(135deg,#DDF8E8,#C7F4D5);
+}
+
+.tsp-medium{
+    background:linear-gradient(135deg,#FFF3C4,#FFEAA5);
+}
+
+.tsp-unhealthy{
+    background:linear-gradient(135deg,#FFD8B8,#FFC89A);
+}
+
+.tsp-very-unhealthy{
+    background:linear-gradient(135deg,#FFC7C7,#FFAEAE);
+}
+
+.tsp-hazardous{
+    background:linear-gradient(135deg,#E5D6FF,#D8C2FF);
+}
+
+/* ==========================================
+   ECO2 CARD STATUS
+========================================== */
+
+.eco2-normal{
+    background:linear-gradient(135deg,#DDF8E8,#C7F4D5);
+}
+
+.eco2-high{
+    background:linear-gradient(135deg,#FFF3C4,#FFEAA5);
+}
+
+.eco2-danger{
+    background:linear-gradient(135deg,#FFC7C7,#FFAEAE);
+}
+
+.eco2-error{
+    background:linear-gradient(135deg,#E1E5EA,#C9D0D8);
+}
+
+/* ==========================================
+   UPDATE & LOADING
+========================================== */
+
+.update-animation{
+    display:inline-block;
+    animation:pop .35s ease;
+}
+
+@keyframes pop{
+    0%{ transform:scale(1); }
+    40%{ transform:scale(1.12); }
+    100%{ transform:scale(1); }
+}
+
+.loading-screen{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#EEF2F5;
+    transition:opacity .35s ease, visibility .35s ease;
+}
+
+.loading-content{
+    width:min(280px,80vw);
+    text-align:center;
+    color:#172B4D;
+}
+
+.loading-content i{
+    color:#06A77D;
+    font-size:36px;
+}
+
+.loading-content p{
+    margin-top:12px;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.loading-content span{
+    display:block;
+    margin-top:8px;
+    font-size:12px;
+    color:#7B8794;
+}
+
+.loading-bar{
+    height:6px;
+    margin-top:18px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#DDE5EB;
+}
+
+.loading-bar span{
+    width:40%;
+    height:100%;
+    margin:0;
+    border-radius:inherit;
+    background:#06A77D;
+    animation:loading-bar 1s ease-in-out infinite;
+}
+
+@keyframes loading-bar{
+    0%{ transform:translateX(-110%); }
+    100%{ transform:translateX(280%); }
+}
+
+.dashboard-ready .loading-screen{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
