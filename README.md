@@ -26,15 +26,29 @@ Buka `http://127.0.0.1:5000`.
 }
 ```
 
-## Deploy Render
+## Deploy Vercel
 
-File `render.yaml` sudah disertakan. Saat membuat service dari dashboard Render, gunakan:
+Proyek ini sudah menggunakan entry point Flask yang dideteksi Vercel (`app.py`),
+sehingga tidak memerlukan `vercel.json` atau Build Command khusus.
 
-- **Type:** Web Service
-- **Runtime:** Python
-- **Build Command:** `pip install -r requirements.txt`
-- **Start Command:** `gunicorn -w 1 --threads 100 --bind 0.0.0.0:$PORT app:app`
-- **Health Check Path:** `/health`
+1. Push folder ini ke GitHub, lalu **Add New → Project** di Vercel dan pilih repositorinya.
+2. Biarkan Framework Preset dan Build Command pada nilai default, lalu deploy.
+3. Tambahkan variabel lingkungan MQTT di **Settings → Environment Variables** bila
+   aplikasi juga dijalankan pada server realtime terpisah.
+
+File statis sekarang berada di `public/`, agar disajikan dari CDN Vercel.
+
+### Batasan realtime
+
+Dashboard Flask dapat dideploy di Vercel, tetapi bridge MQTT dan Socket.IO pada
+proyek ini membutuhkan proses yang terus hidup. Karena itu bridge tersebut hanya
+aktif saat dijalankan lokal atau di server persisten; pada Vercel dashboard akan
+menampilkan `REALTIME BACKEND REQUIRED` dan tidak mencoba membuka Socket.IO.
+
+Untuk data realtime di production, jalankan `app.py` ini pada layanan server
+persisten (misalnya Render/Railway/Fly.io/VPS) sebagai bridge MQTT, atau ubah
+frontend untuk berlangganan MQTT over WebSocket langsung ke broker. Vercel tetap
+cocok untuk menyajikan frontend/dashboard.
 
 ## Environment variables opsional
 

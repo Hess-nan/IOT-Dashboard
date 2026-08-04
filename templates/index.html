@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body data-realtime-enabled="{{ 'true' if realtime_enabled else 'false' }}">
 
     <div id="loadingScreen" class="loading-screen" role="status">
         <div class="loading-content">
@@ -192,7 +192,9 @@
 
     <!-- Javascript -->
 
+    {% if realtime_enabled %}
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    {% endif %}
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 

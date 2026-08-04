@@ -52,7 +52,7 @@ function updateDeviceInfo(data) {
 
 function checkSensorStatus() {
 
-    if (!socket.connected) {
+    if (!socket || !socket.connected) {
         return;
     }
 
@@ -72,10 +72,19 @@ setInterval(updateClock, 1000);
 setInterval(checkSensorStatus, 1000);
 updateClock();
 
-const socket = io();
+const realtimeEnabled = document.body.dataset.realtimeEnabled === "true";
+const socket = realtimeEnabled ? io() : null;
 
-setConnectionStatus("WAITING SENSOR", "#f1c40f");
+setConnectionStatus(
+    realtimeEnabled ? "WAITING SENSOR" : "REALTIME BACKEND REQUIRED",
+    realtimeEnabled ? "#f1c40f" : "#e74c3c"
+);
 
+if (!realtimeEnabled) {
+    document.body.classList.add("dashboard-ready");
+}
+
+if (socket) {
 socket.on("connect", () => {
 
     console.log("WebSocket Connected");
@@ -88,6 +97,7 @@ socket.on("disconnect", () => {
     setConnectionStatus("OFFLINE", "#e74c3c");
 
 });
+}
 
 // ========================================
 // UPDATE WARNA TSP
@@ -166,6 +176,7 @@ function updateEco2Card(status) {
 // DATA DARI MQTT
 // ========================================
 
+if (socket) {
 socket.on("sensor_update", (data) => {
 
     console.log("Data MQTT diterima:", data);
@@ -215,3 +226,4 @@ socket.on("sensor_update", (data) => {
     document.body.classList.add("dashboard-ready");
 
 });
+}

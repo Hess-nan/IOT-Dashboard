@@ -4,7 +4,9 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO
 from mqtt.mqtt_client import start_mqtt
 
-app = Flask(__name__)
+# Vercel serves files in ./public directly from its CDN.  Using the same folder
+# locally keeps the URLs identical in both environments.
+app = Flask(__name__, static_folder="public", static_url_path="")
 
 socketio = SocketIO(
     app,
@@ -12,8 +14,12 @@ socketio = SocketIO(
     async_mode="threading"
 )
 
-# Jalankan MQTT
-start_mqtt(socketio)
+# Vercel Functions are short-lived and must not run a persistent MQTT client.
+# Keep the MQTT + Socket.IO bridge for local/self-hosted deployments only.
+IS_VERCEL = os.getenv("VERCEL") == "1"
+
+if not IS_VERCEL:
+    start_mqtt(socketio)
 
 @socketio.on("connect")
 def handle_connect():
@@ -21,7 +27,7 @@ def handle_connect():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", realtime_enabled=not IS_VERCEL)
 
 @app.route("/health")
 def health():
