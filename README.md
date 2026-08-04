@@ -19,12 +19,14 @@ Buka `http://127.0.0.1:5000`.
   "humidity": 65,
   "tsp": 70,
   "statusIspuTsp": "T sehat",
-  "ppmeCO2": 1200,
-  "eCO2Status": "Tinggi",
+  "ppmEco2": 1200,
+  "eco2Status": "Tinggi",
   "firmware": "2.4.1",
   "wifi": -63
 }
 ```
+
+Format lama `ppmeCO2` dan `eCO2Status` juga tetap didukung.
 
 ## Deploy Vercel
 

@@ -9,6 +9,12 @@ TOPIC = os.getenv("MQTT_TOPIC", "ruangan/kualitas_udara")
 USERNAME = os.getenv("MQTT_USERNAME")
 PASSWORD = os.getenv("MQTT_PASSWORD")
 
+def normalize_payload(payload):
+    """Accept the field names used by both firmware payload formats."""
+    payload["ppmeCO2"] = payload.get("ppmeCO2", payload.get("ppmEco2"))
+    payload["eCO2Status"] = payload.get("eCO2Status", payload.get("eco2Status"))
+    return payload
+
 def start_mqtt(socketio):
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
 
@@ -22,6 +28,7 @@ def start_mqtt(socketio):
     def on_message(client, userdata, msg):
         try:
             payload = json.loads(msg.payload.decode())
+            payload = normalize_payload(payload)
 
             print("MQTT diterima:", payload)
 
