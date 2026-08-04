@@ -24,6 +24,16 @@ def start_mqtt(socketio):
     def on_connect(client, userdata, flags, rc):
         print("MQTT Connected: ", rc)
         client.subscribe(TOPIC)
+        print("MQTT subscribed to:", TOPIC)
+
+    def on_connect_fail(client, userdata):
+        print(
+            "MQTT connection failed. Check MQTT_BROKER, MQTT_PORT, "
+            "and whether the broker accepts connections from Railway."
+        )
+
+    def on_disconnect(client, userdata, rc):
+        print("MQTT disconnected, code:", rc)
 
     def on_message(client, userdata, msg):
         try:
@@ -41,6 +51,9 @@ def start_mqtt(socketio):
             print(e)
 
     client.on_connect = on_connect
+    client.on_connect_fail = on_connect_fail
+    client.on_disconnect = on_disconnect
     client.on_message = on_message
+    print("MQTT connecting to {}:{} (topic: {})".format(BROKER, PORT, TOPIC))
     client.connect_async(BROKER, PORT, 60)
     client.loop_start()
