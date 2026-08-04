@@ -193,7 +193,7 @@ socket.on("sensor_update", (data) => {
 
     document.getElementById("tsp").textContent = tsp;
 
-    document.getElementById("ppmeCO2").textContent = eco2;
+    document.getElementById("ppmeCO2").textContent = eco2.toFixed(2);
 
     document.getElementById("temperature").textContent = temperature;
 
