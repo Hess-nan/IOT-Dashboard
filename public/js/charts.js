@@ -20,8 +20,11 @@ const history = {
 
 function updateRealtimeChart(chart, historyArray, newValue) {
 
-    // Tambah data baru
-    historyArray.push(newValue);
+    // Simpan nilai bersama waktu penerimaannya agar sumbu X dapat dibaca.
+    historyArray.push({
+        x: Date.now(),
+        y: newValue
+    });
 
     // Simpan maksimal 20 data
     if (historyArray.length > 20) {
@@ -39,12 +42,12 @@ function updateRealtimeChart(chart, historyArray, newValue) {
 // MEMBUAT CHART
 // ======================================================
 
-function createChart(id, color, data, height) {
+function createChart(id, color, data, height, decimals, showAxes = true) {
 
     const options = {
 
         chart: {
-            type: "line",
+            type: "area",
             height: height,
             width: "100%",
 
@@ -59,7 +62,7 @@ function createChart(id, color, data, height) {
             },
 
             sparkline: {
-                enabled: true
+                enabled: false
             },
 
             toolbar: {
@@ -76,6 +79,17 @@ function createChart(id, color, data, height) {
             width: 3
         },
 
+        dataLabels: {
+            enabled: false
+        },
+
+        markers: {
+            size: showAxes ? 4 : 0,
+            hover: {
+                size: 6
+            }
+        },
+
         colors: [color],
 
         fill: {
@@ -87,7 +101,51 @@ function createChart(id, color, data, height) {
         },
 
         tooltip: {
-            enabled: true
+            enabled: true,
+            x: {
+                format: "HH:mm:ss"
+            },
+            y: {
+                formatter: (value) => Number(value).toFixed(decimals)
+            }
+        },
+
+        xaxis: {
+            type: "datetime",
+            labels: {
+                show: showAxes,
+                datetimeUTC: false,
+                format: "HH:mm",
+                style: {
+                    fontSize: "10px"
+                }
+            },
+            axisBorder: {
+                show: showAxes
+            },
+            axisTicks: {
+                show: showAxes
+            }
+        },
+
+        yaxis: {
+            show: showAxes,
+            labels: {
+                formatter: (value) => Number(value).toFixed(decimals),
+                style: {
+                    fontSize: "10px"
+                }
+            }
+        },
+
+        grid: {
+            show: showAxes,
+            borderColor: "rgba(19, 48, 91, 0.16)",
+            strokeDashArray: 3,
+            padding: {
+                left: 4,
+                right: 4
+            }
         }
 
     };
@@ -114,7 +172,9 @@ const tspChart = createChart(
 
     history.tsp,
 
-    150
+    150,
+
+    0
 
 );
 
@@ -126,7 +186,9 @@ const eco2Chart = createChart(
 
     history.eco2,
 
-    150
+    150,
+
+    2
 
 );
 
@@ -138,7 +200,9 @@ const temperatureChart = createChart(
 
     history.temperature,
 
-    60
+    110,
+
+    1
 
 );
 
@@ -150,7 +214,9 @@ const humidityChart = createChart(
 
     history.humidity,
 
-    60
+    110,
+
+    0
 
 );
 
