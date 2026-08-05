@@ -14,6 +14,20 @@ function updateClock() {
 
 }
 
+function updateDate() {
+
+    document.getElementById("date").textContent = new Date().toLocaleDateString(
+        "id-ID",
+        {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+}
+
 function setConnectionStatus(status, color) {
 
     document.getElementById("connectionStatus").textContent = status;
@@ -71,6 +85,8 @@ function checkSensorStatus() {
 setInterval(updateClock, 1000);
 setInterval(checkSensorStatus, 1000);
 updateClock();
+
+updateDate();
 
 const realtimeEnabled = document.body.dataset.realtimeEnabled === "true";
 const socket = realtimeEnabled ? io() : null;
